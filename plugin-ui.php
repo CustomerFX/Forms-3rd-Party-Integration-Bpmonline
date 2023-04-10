@@ -44,8 +44,8 @@
 		
 		<h2><?php _e(self::pluginPageTitle);?> &mdash; <?php _e('Settings');?></h2>
 		<div class="description">
-			<p><?php _e('Set options for 3rd-party integration', $P); ?>.</p>
-			<p><?php _e('Map each Form plugin field to its corresponding field in the 3rd-Party service', $P); ?>.</p>
+			<p><?php _e('Set options for Creatio integration', $P); ?>.</p>
+			<p><?php _e('Map each Form plugin field to its corresponding field in Creatio', $P); ?>.</p>
 			<p><?php _e('If you need to submit a value directly, check the &quot;Is Value?&quot; box and enter the value for the <em>Form plugin Field</em> column', $P); ?>.</p>
 		</div>
 		
@@ -113,21 +113,21 @@
 		?>
 		<div id="metabox-<?php echo $eid; ?>" class="meta-box">
 		<div class="shortcode-description postbox">
-			<h3 class="hndle"><span>3rd-Party Service: <?php echo esc_attr($entity['name'])?></span></h3>
+			<h3 class="hndle"><span>Creatio Landing Page: <?php echo esc_attr($entity['name'])?></span></h3>
 			
 			<div class="description-body inside">
 			
-			<fieldset class="postbox open"><legend class="hndle"><span>Service</span></legend>
+			<fieldset class="postbox open"><legend class="hndle"><span>Creatio</span></legend>
 				<div class="inside">
 					<div class="field">
-						<label for="name-<?php echo $eid?>">Service Name</label>
+						<label for="name-<?php echo $eid?>">Landing Page Name Name</label>
 						<input id="name-<?php echo $eid?>" type="text" class="text" name="<?php echo $P?>[<?php echo $eid?>][name]" value="<?php echo esc_attr($entity['name'])?>" />
 					</div>
 			
 					<div class="field">
 						<label for="url-<?php echo $eid?>">Submission URL</label>
 						<input id="url-<?php echo $eid?>" type="text" class="text" name="<?php echo $P?>[<?php echo $eid?>][url]" value="<?php echo esc_attr(empty($entity['url']) ? $debugUrl : $entity['url'])?>" />
-						<em class="description"><?php echo sprintf(__('The url of the external submission -- usually the <code>action</code> attribute of the 3rd-party form.  See <a href="%s">Debug Mode</a> setting for a <a href="%s">working test url</a>.', $P), '#dbg-debugmode', $debugUrl);?></em>
+						<em class="description"><?php echo sprintf(__('The Creatio Landing Page URL, such as <code>https://oncologysystems.creatio.com/0/ServiceModel/GeneratedObjectWebFormService.svc/SaveWebFormObjectData</code>.  See <a href="%s">Debug Mode</a> setting for a <a href="%s">working test url</a>.', $P), '#dbg-debugmode', $debugUrl);?></em>
 					</div>
 					
 		
@@ -137,7 +137,7 @@
 							// print various forms
 							$this->form_select_input($forms, $eid, isset($entity['forms']) ? $entity['forms'] : '');
 						?>
-						<em class="description"><?php _e('Choose which forms submit to this service.', $P);?> <?php _e('Hold <kbd>CTRL</kbd> to (un)select more than one');?>.</em>
+						<em class="description"><?php _e('Choose which forms submit to this landing page.', $P);?> <?php _e('Hold <kbd>CTRL</kbd> to (un)select more than one');?>.</em>
 					</div>
 					
 					<div class="field">
@@ -156,7 +156,7 @@
 					<div class="field">
 						<label for="timeout-<?php echo $eid?>">Request timeout</label>
 						<input id="timout-<?php echo $eid?>" type="text" class="text" name="<?php echo $P?>[<?php echo $eid?>][timeout]" value="<?php echo esc_attr($entity['timeout'])?>" />
-						<em class="description"><?php echo sprintf(__('How long (in seconds) to attempt the 3rd-party remote request before giving up.  Default %d', $P), self::DEFAULT_TIMEOUT);?>.</em>
+						<em class="description"><?php echo sprintf(__('How long (in seconds) to attempt the Creatio remote request before giving up.  Default %d', $P), self::DEFAULT_TIMEOUT);?>.</em>
 					</div>
 				</div>
 			</fieldset><!-- Service -->
@@ -165,10 +165,11 @@
 			do_action($this->N('service_settings'), $eid, $P, $entity);
 			?>
 
-			<fieldset class="postbox open"><legend class="hndle"><span>Mapping</span></legend>
+			<fieldset class="postbox open"><legend class="hndle"><span>Field Mapping</span></legend>
 				<table class="mappings inside">
-				<caption><?php _e('Listing of Form(s) Plugin fields to 3rd-party Mappings.  <br />
-				* Note that the label is just for you to remind yourself what the mapping is for, and does not do anything.  <br />
+				<caption><?php _e('Listing of Form(s) Plugin fields to Creatio Mappings.  <br />
+				Note that the label is just for you to remind yourself what the mapping is for, and does not do anything.  <br />
+				<strong>Be sure to include the Creatio Landing Page Id: Check the box for "Is Value", put the Id value in the "Form Submission Field" column, and add the Creatio Field as "formId".</strong> <br />
 				Also, if you accidentally delete all of the mapping fields, try deleting the Service entry and refreshing the page, then adding another Service.', $P);?></caption>
 				<thead>
 					<tr>
@@ -182,8 +183,8 @@
 							<p class="descr"><?php _e('The input name/id from the form plugin (CF7/GF),<br /> or the value to submit if \'Is Value\' is checked', $P);?></p>
 						</th>
 						<th id="th-<?php echo $eid, '-', self::PARAM_3RD ?>">
-							<strong><?php _e('3rd-Party Field', $P);?></strong>
-							<p class="descr"><?php _e('The input name/id from the external service', $P);?></p>
+							<strong><?php _e('Creatio Field', $P);?></strong>
+							<p class="descr"><?php _e('The field name in Creatio', $P);?></p>
 						</th>
 						<th id="th-<?php echo $eid?>-action" class="thin"><?php _e('Drag', $P);?></th>
 					</tr>
@@ -263,8 +264,8 @@
 			</fieldset><!-- Hooks -->
 			</section>
 
-			<span class="button"><a href="#" class="actn" data-actn="remove" data-after="metabox" data-rel="div.meta-box">Delete Service</a></span>
-			<span class="button"><a href="#" class="actn" data-actn="clone" data-after="metabox" data-rel="div.meta-box">Add Another Service</a></span>
+			<span class="button"><a href="#" class="actn" data-actn="remove" data-after="metabox" data-rel="div.meta-box">Delete Landing Page</a></span>
+			<span class="button"><a href="#" class="actn" data-actn="clone" data-after="metabox" data-rel="div.meta-box">Add Another Landing Page</a></span>
 
 			
 			</div><?php /*-- end div.description-body inside  --*/ ?>

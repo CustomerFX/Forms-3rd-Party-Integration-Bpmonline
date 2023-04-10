@@ -1,9 +1,10 @@
 <?php
 /*
-Plugin Name: Forms: 3rd-Party Integration Bpmonline
-Description: Send plugin Forms Submissions (Gravity, CF7) to Bpmonline
+Plugin Name: Forms: 3rd-Party Integration Creatio
+Description: Send plugin Forms Submissions (Gravity, CF7) to Creatio
 Author: Eugene Podkovka
-Version: 1.0.6
+Updated: Ryan Farley
+Version: 1.0.7
 */
 
 //declare to instantiate
@@ -19,9 +20,9 @@ class Forms3rdPartyIntegration {
 
 	#region =============== CONSTANTS AND VARIABLE NAMES ===============
 	
-	const pluginPageTitle = 'Forms: Bpmonline Integration';
+	const pluginPageTitle = 'Forms: Creatio Integration';
 	
-	const pluginPageShortTitle = 'Bpmonline integration setup';
+	const pluginPageShortTitle = 'Creatio Integration';
 	
 	/**
 	 * Admin - role capability to view the options page
